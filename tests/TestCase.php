@@ -5,8 +5,7 @@ namespace Webfactor\Laravel\OpeningHours\Tests;
 use DB;
 use Illuminate\Database\Schema\Blueprint;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\Tags\TagsServiceProvider;
-use Spatie\Translatable\TranslatableServiceProvider;
+use Webfactor\Laravel\OpeningHours\OpeningHoursServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -19,8 +18,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            TagsServiceProvider::class,
-            TranslatableServiceProvider::class,
+            OpeningHoursServiceProvider::class,
         ];
     }
 
@@ -43,7 +41,7 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
-        $this->dropAllTables();
+        //$this->dropAllTables();
         include_once __DIR__.'/../database/migrations/create_opening_hours_tables.php';
         (new \CreateOpeningHoursTables())->up();
 

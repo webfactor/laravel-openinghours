@@ -12,7 +12,7 @@ use Webfactor\Laravel\OpeningHours\Helpers\Arr;
 
 class OpeningHours
 {
-    /** @var \Spatie\OpeningHours\Day[] */
+    /** @var Day[] */
     protected $openingHours = [];
 
     /** @var array */

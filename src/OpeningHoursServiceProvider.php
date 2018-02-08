@@ -4,7 +4,7 @@ namespace Webfactor\Laravel\OpeningHours;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelOpeningHoursServiceProvider extends ServiceProvider
+class OpeningHoursServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
