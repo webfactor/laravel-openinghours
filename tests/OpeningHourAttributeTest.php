@@ -4,6 +4,7 @@ namespace Webfactor\Laravel\OpeningHours\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Webfactor\Laravel\OpeningHours\Entities\OpeningHours;
+use Webfactor\Laravel\OpeningHours\Exceptions\Exception;
 use Webfactor\Laravel\OpeningHours\Models\DayOpenTimeRange;
 
 class OpeningHourAttributeTest extends TestCase
@@ -45,11 +46,13 @@ class OpeningHourAttributeTest extends TestCase
     /** @test */
     public function it_can_return_the_correct_opening_hours()
     {
-        /** @var OpeningHours $openHours */
-        $openHours = $this->model->opening_hours;
-
-        $this->assertTrue($openHours->isOpenOn('monday'));
-        $this->assertTrue($openHours->isClosedOn('saturday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('monday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('tuesday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('wednesday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('thursday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('friday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('saturday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('sunday'));
     }
 
     /** @test */
@@ -58,7 +61,12 @@ class OpeningHourAttributeTest extends TestCase
         $this->model->opening_hours = null;
 
         $this->assertTrue($this->model->opening_hours->isClosedOn('monday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('tuesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('wednesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('thursday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('friday'));
         $this->assertTrue($this->model->opening_hours->isClosedOn('saturday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('sunday'));
 
         $this->assertEquals(0, DayOpenTimeRange::all()->count());
     }
@@ -70,7 +78,47 @@ class OpeningHourAttributeTest extends TestCase
 
         $this->model->opening_hours = $hours;
 
-        $this->assertTrue($this->model->opening_hours->isOpenOn('sunday'));
         $this->assertTrue($this->model->opening_hours->isClosedOn('monday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('tuesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('wednesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('thursday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('friday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('saturday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('sunday'));
+    }
+
+    /** @test */
+    public function it_can_set_opening_hours_from_array()
+    {
+        $this->model->opening_hours = $this->openHours;
+
+        $this->assertTrue($this->model->opening_hours->isClosedOn('monday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('tuesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('wednesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('thursday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('friday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('saturday'));
+        $this->assertTrue($this->model->opening_hours->isOpenOn('sunday'));
+
+    }
+
+    /** @test */
+    public function it_can_clear_opening_hours_from_array()
+    {
+        $this->model->opening_hours = [];
+
+        $this->assertTrue($this->model->opening_hours->isClosedOn('monday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('tuesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('wednesday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('thursday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('friday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('saturday'));
+        $this->assertTrue($this->model->opening_hours->isClosedOn('sunday'));
+    }
+
+    public function it_throws_an_exception_for_wrong_attribute_data()
+    {
+        $this->expectException(Exception::class);
+        $this->model->opening_hours = 'hello world';
     }
 }
