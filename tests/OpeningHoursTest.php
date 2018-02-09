@@ -2,7 +2,6 @@
 
 namespace Webfactor\Laravel\OpeningHours\Tests;
 
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Webfactor\Laravel\OpeningHours\Entities\Day;
 use Webfactor\Laravel\OpeningHours\Entities\OpeningHours;
@@ -46,5 +45,4 @@ class OpeningHoursTest extends TestCase
         $this->assertEquals('08:00', $hour->start);
         $this->assertEquals('18:00', $hour->end);
     }
-
 }
