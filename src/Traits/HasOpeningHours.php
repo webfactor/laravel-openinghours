@@ -10,5 +10,6 @@ trait HasOpeningHours
 {
     use OpeningHoursRelations;
     use OpeningHoursAttribute;
+    use OpeningHoursScopes;
 
 }

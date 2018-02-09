@@ -7,7 +7,7 @@ use Webfactor\Laravel\OpeningHours\Entities\OpeningHours;
 use Webfactor\Laravel\OpeningHours\Exceptions\Exception;
 use Webfactor\Laravel\OpeningHours\Models\DayOpenTimeRange;
 
-class OpeningHourAttributeTest extends TestCase
+class OpeningHoursAttributeTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -41,6 +41,12 @@ class OpeningHourAttributeTest extends TestCase
         foreach ($this->openTimeRanges as $hour) {
             $this->model->dayOpenTimeRanges()->create($hour);
         }
+    }
+
+    /** @test */
+    public function it_can_get_model_opening_hours_attribute()
+    {
+        $this->assertInstanceOf(OpeningHours::class, $this->model->opening_hours);
     }
 
     /** @test */

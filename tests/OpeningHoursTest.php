@@ -47,12 +47,4 @@ class OpeningHoursTest extends TestCase
         $this->assertEquals('18:00', $hour->end);
     }
 
-    /** @test */
-    public function it_can_get_model_opening_hours_attribute()
-    {
-        $model = TestModel::create();
-
-        $this->assertInstanceOf(OpeningHours::class, $model->opening_hours);
-    }
-
 }
