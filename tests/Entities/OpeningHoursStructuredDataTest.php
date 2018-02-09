@@ -5,7 +5,6 @@ namespace Webfactor\Laravel\OpeningHours\Tests\Entities;
 use PHPUnit\Framework\TestCase;
 use Webfactor\Laravel\OpeningHours\Entities\OpeningHours;
 
-
 class OpeningHoursStructuredDataTest extends TestCase
 {
     /** @test */

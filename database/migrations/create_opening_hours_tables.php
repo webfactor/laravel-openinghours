@@ -7,7 +7,7 @@ class CreateOpeningHoursTables extends Migration
 {
     public function up()
     {
-        Schema::create('opening_hours', function(\Illuminate\Database\Schema\Blueprint $table) {
+        Schema::create('opening_hours', function (\Illuminate\Database\Schema\Blueprint $table) {
             $table->increments('id');
             $table->morphs('openable');
             $table->enum('day', [

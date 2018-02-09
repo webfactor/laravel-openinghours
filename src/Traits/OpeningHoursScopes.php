@@ -36,7 +36,7 @@ trait OpeningHoursScopes
         $now = Carbon::now();
         if ($time == null) {
             $time = Time::fromDateTime($now);
-        } else if (is_string($time)) {
+        } elseif (is_string($time)) {
             $time = Time::fromString($time);
         }
 
@@ -48,7 +48,7 @@ trait OpeningHoursScopes
             }
         }
 
-        return $query->whereHas($this->openingHoursRelationName, function(Builder $subquery) use ($day, $time) {
+        return $query->whereHas($this->openingHoursRelationName, function (Builder $subquery) use ($day, $time) {
             $subquery
                 ->where('day', $day)
                 ->where('start', '<=', $time)
@@ -73,7 +73,7 @@ trait OpeningHoursScopes
         $now = Carbon::now();
         if ($time == null) {
             $time = Time::fromDateTime($now);
-        } else if (is_string($time)) {
+        } elseif (is_string($time)) {
             $time = Time::fromString($time);
         }
 
@@ -85,7 +85,7 @@ trait OpeningHoursScopes
             }
         }
 
-        return $query->whereDoesntHave($this->openingHoursRelationName, function(Builder $subquery) use ($day, $time) {
+        return $query->whereDoesntHave($this->openingHoursRelationName, function (Builder $subquery) use ($day, $time) {
             $subquery
                 ->where('day', $day)
                 ->where('start', '<=', $time)

@@ -105,7 +105,6 @@ class OpeningHoursAttributeTest extends TestCase
         $this->assertTrue($this->model->opening_hours->isClosedOn('friday'));
         $this->assertTrue($this->model->opening_hours->isOpenOn('saturday'));
         $this->assertTrue($this->model->opening_hours->isOpenOn('sunday'));
-
     }
 
     /** @test */

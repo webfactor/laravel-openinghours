@@ -24,7 +24,6 @@ trait OpeningHoursAttribute
         }
 
         return $this->attributes['opening_hours'];
-
     }
 
     public function setOpeningHoursAttribute($data)
